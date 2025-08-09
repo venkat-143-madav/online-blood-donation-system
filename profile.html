@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blood Donation Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff4d4d, #ff9999);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .profile-box {
+      background: #fff;
+      width: 350px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .profile-box h2 {
+      margin-bottom: 15px;
+      font-size: 26px;
+      color: #b30000;
+    }
+
+    .profile-logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid #ff4d4d;
+    }
+
+    .info-box {
+      display: flex;
+      justify-content: space-around;
+      margin: 15px 0;
+    }
+
+    .info {
+      background: #ffe6e6;
+      padding: 10px;
+      border-radius: 10px;
+      width: 90px;
+      font-size: 14px;
+      color: #800000;
+    }
+
+    .toggle-section {
+      margin: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 15px;
+      border-radius: 10px;
+      background: #ffe6e6;
+      font-weight: bold;
+      color: #800000;
+    }
+
+    /* Toggle Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 25px;
+    }
+
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 25px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 4px;
+      bottom: 3.5px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider { background-color: #28a745; }
+    input:checked + .slider:before { transform: translateX(24px); }
+
+    /* Buttons */
+    .btn {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .feedback { background: #ff6666; color: #fff; }
+    .feedback:hover { background: #e60000; }
+    .help { background: #ffb366; color: #fff; }
+    .help:hover { background: #e69500; }
+    .logout { background: #999; color: #fff; }
+    .logout:hover { background: #666; }
+    .logout i { font-size: 18px; }
+
+    /* Modals */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      width: 400px;
+      max-height: 80vh;
+      overflow-y: auto;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+    .modal-content h3 {
+      text-align: center;
+      color: #b30000;
+      margin-bottom: 10px;
+    }
+    .close-btn {
+      background: #b30000;
+      color: #fff;
+      padding: 8px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    /* Help Options */
+    .help-option {
+      background: #ffe6e6;
+      margin: 6px 0;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .help-option:hover { background: #ffcccc; }
+
+    /* Feedback Form */
+    .feedback-form input, .feedback-form textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .feedback-form button {
+      width: 100%;
+      padding: 10px;
+      background: #ff6666;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .feedback-form button:hover { background: #e60000; }
+
+    .rating { display: flex; justify-content: center; margin: 8px 0; }
+    .rating i { font-size: 25px; color: #ccc; cursor: pointer; margin: 0 4px; }
+    .rating i.active { color: #ffcc00; }
+  </style>
+</head>
+<body>
+
+  <div class="profile-box">
+    <h2>Profile</h2>
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile Logo" class="profile-logo">
+
+    <div class="info-box">
+      <div class="info"><strong>Blood</strong><br> O+</div>
+      <div class="info"><strong>Donated</strong><br> 5</div>
+      <div class="info"><strong>Requested</strong><br> 3</div>
+    </div>
+
+    <div class="toggle-section">
+      Available:
+      <label class="switch">
+        <input type="checkbox" id="toggleAvailable">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <button class="btn feedback" id="feedbackBtn">Feedback</button>
+    <button class="btn help" id="openHelp">Get Help</button>
+    <button class="btn logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Log Out</button>
+  </div>
+
+  <!-- Help Modal -->
+  <div class="modal" id="helpModal">
+    <div class="modal-content">
+      <h3>🆘 Get Help</h3>
+      <div class="help-option"><i class="fas fa-tint"></i> How to Request Blood?</div>
+      <div class="help-option"><i class="fas fa-hand-holding-medical"></i> How to Become a Donor?</div>
+      <div class="help-option"><i class="fas fa-check-circle"></i> Eligibility Criteria for Donors</div>
+      <div class="help-option"><i class="fas fa-headset"></i> Contact Support Team</div>
+      <div class="help-option"><i class="fas fa-map-marker-alt"></i> Locate Nearby Blood Banks</div>
+      <div class="help-option"><i class="fas fa-question-circle"></i> FAQs</div>
+      <div class="help-option"><i class="fas fa-exclamation-triangle"></i> Report an Issue</div>
+      <div class="help-option"><i class="fas fa-phone-alt"></i> Emergency Helpline</div>
+      <div class="help-option"><i class="fas fa-book-medical"></i> Donation Guidelines</div>
+      <div class="help-option"><i class="fas fa-comment-dots"></i> Feedback & Suggestions</div>
+      <div class="help-option"><i class="fas fa-clock"></i> Track Your Requests</div>
+      <div class="help-option"><i class="fas fa-history"></i> Track Donation History</div>
+      <div class="help-option"><i class="fas fa-bell"></i> Donation Reminders</div>
+      <div class="help-option"><i class="fas fa-heartbeat"></i> Health & Safety Tips</div>
+      <div class="help-option"><i class="fas fa-hand-holding-droplet"></i> Types of Blood Donation</div>
+      <div class="help-option"><i class="fas fa-user-check"></i> Verify Donor/Recipient</div>
+      <div class="help-option"><i class="fas fa-calendar-check"></i> Schedule Appointment</div>
+      <div class="help-option"><i class="fas fa-file-contract"></i> Legal & Privacy Policy</div>
+      <div class="help-option"><i class="fas fa-bullhorn"></i> Awareness Campaigns</div>
+      <div class="help-option"><i class="fas fa-users"></i> Volunteer Opportunities</div>
+      <div class="help-option"><i class="fas fa-language"></i> Language Support</div>
+      <div class="help-option"><i class="fas fa-user-cog"></i> Account Assistance</div>
+      <div class="help-option"><i class="fas fa-cogs"></i> Notification Settings</div>
+      <div class="help-option"><i class="fas fa-search"></i> Emergency Blood Matching Help</div>
+      <div class="help-option"><i class="fas fa-video"></i> Educational Videos</div>
+
+      <div class="close-btn" id="closeHelp">Close</div>
+    </div>
+  </div>
+
+  <!-- Feedback Modal -->
+  <div class="modal" id="feedbackModal">
+    <div class="modal-content">
+      <h3>📝 Feedback Form</h3>
+      <div class="feedback-form">
+        <label>Overall Experience:</label>
+        <div class="rating" id="starRating">
+          <i class="fas fa-star" data-value="1"></i>
+          <i class="fas fa-star" data-value="2"></i>
+          <i class="fas fa-star" data-value="3"></i>
+          <i class="fas fa-star" data-value="4"></i>
+          <i class="fas fa-star" data-value="5"></i>
+        </div>
+        <label>Was the system easy to use?</label>
+        <input type="radio" name="ease" value="Yes"> Yes
+        <input type="radio" name="ease" value="No"> No
+
+        <label>Was the blood request process simple?</label>
+        <input type="radio" name="request" value="Yes"> Yes
+        <input type="radio" name="request" value="No"> No
+
+        <label>Suggestions:</label>
+        <textarea id="suggestions" rows="4" placeholder="Enter your feedback here..."></textarea>
+
+        <button id="submitFeedback">Submit Feedback</button>
+      </div>
+      <div class="close-btn" id="closeFeedback">Close</div>
+    </div>
+  </div>
+
+  <script>
+    const toggle = document.getElementById("toggleAvailable");
+    const helpModal = document.getElementById("helpModal");
+    const openHelp = document.getElementById("openHelp");
+    const closeHelp = document.getElementById("closeHelp");
+    const feedbackBtn = document.getElementById("feedbackBtn");
+    const feedbackModal = document.getElementById("feedbackModal");
+    const closeFeedback = document.getElementById("closeFeedback");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    // Toggle Available Alert
+    toggle.addEventListener("change", function () {
+      alert(this.checked ? "You are now available to donate blood!" : "You are not available for donation currently.");
+    });
+
+    // Help Modal Logic
+    openHelp.addEventListener("click", () => helpModal.style.display = "flex");
+    closeHelp.addEventListener("click", () => helpModal.style.display = "none");
+
+    // Feedback Modal Logic
+    feedbackBtn.addEventListener("click", () => feedbackModal.style.display = "flex");
+    closeFeedback.addEventListener("click", () => feedbackModal.style.display = "none");
+
+    // Close modal on outside click
+    window.onclick = (e) => {
+      if (e.target === helpModal) helpModal.style.display = "none";
+      if (e.target === feedbackModal) feedbackModal.style.display = "none";
+    };
+
+    // Star Rating Logic
+    const stars = document.querySelectorAll("#starRating i");
+    let selectedRating = 0;
+    stars.forEach(star => {
+      star.addEventListener("click", () => {
+        selectedRating = star.getAttribute("data-value");
+        stars.forEach(s => s.classList.remove("active"));
+        for (let i = 0; i < selectedRating; i++) {
+          stars[i].classList.add("active");
+        }
+      });
+    });
+
+    // Feedback Submission
+    document.getElementById("submitFeedback").addEventListener("click", () => {
+      const ease = document.querySelector("input[name='ease']:checked");
+      const request = document.querySelector("input[name='request']:checked");
+      const suggestions = document.getElementById("suggestions").value;
+
+      if (!selectedRating || !ease || !request) {
+        alert("⚠ Please fill all required fields!");
+        return;
+      }
+
+      alert(`✅ Thank you for your feedback!\n\n⭐ Rating: ${selectedRating}\nEase: ${ease.value}\nRequest: ${request.value}\nSuggestions: ${suggestions || "None"}`);
+      feedbackModal.style.display = "none";
+    });
+
+    // Logout Redirect
+    logoutBtn.addEventListener("click", () => {
+      window.location.href = "file:///C:/Users/Chitra%20Venkat/Desktop/project/index.html";
+    });
+  </script>
+
+</body>
+</html>

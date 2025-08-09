@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donate Blood - Home</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d0d14;
+      color: white;
+      padding-bottom: 80px;
+    }
+
+    .top-section {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      gap: 15px;
+    }
+
+    .top-section img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      object-fit: cover;
+    }
+
+    .donate-card {
+      background-color: #2b2b3d;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .donate-card h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .donate-btn {
+      padding: 10px 20px;
+      background-color: #ff0055;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .donate-card img {
+      height: 100px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      margin: 20px;
+      margin-bottom: 10px;
+    }
+
+    .refresh {
+      float: right;
+      margin-right: 20px;
+      color: #f04;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .request-card {
+      background-color: #2b2b3d;
+      border-radius: 10px;
+      padding: 15px 20px 60px;
+      margin: 0 20px 20px;
+      position: relative;
+    }
+
+    .blood-type {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      background-color: #d50000;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    .donating-request-btn {
+      position: absolute;
+      bottom: 15px;
+      right: 20px;
+      background-color: #ff0055;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .donor-card {
+      background-color: #1f1f2f;
+      margin: 10px 20px;
+      padding: 15px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .donor-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .donor-name {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .donor-meta {
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .view-btn {
+      background-color: #ff0055;
+      border: none;
+      padding: 6px 12px;
+      color: white;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #1a1a26;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-top: 1px solid #333;
+      z-index: 100;
+    }
+
+    .bottom-nav a {
+      text-align: center;
+      color: #ccc;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .bottom-nav a.active {
+      color: #f04;
+    }
+
+    .bottom-nav a i {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 3px;
+    }
+
+    /* Popup Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+    }
+
+    .modal-content {
+      background: #2b2b3d;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+    }
+
+    .close-btn {
+      background: #ff0055;
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-section">
+    <img src="venkat.jpg" alt="User" />
+    <div>
+      <strong>Hello User 👋</strong><br />
+      <small>How are you today?</small>
+    </div>
+  </div>
+
+  <div class="donate-card">
+    <div>
+      <h2>Donate Blood,<br>Save Lives</h2>
+      <button class="donate-btn" onclick="window.location.href='file:///C:/Users/Chitra%20Venkat/Desktop/project/donate%20form.html'">Donate Now</button>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/4626/4626906.png" alt="Donate" />
+  </div>
+
+  <div class="section-title">
+    Emergency requests <span class="refresh">Refresh</span>
+  </div>
+
+  <!-- Emergency requests container -->
+  <div id="emergency-requests"></div>
+
+  <!-- Example static requests -->
+  <div class="request-card">
+    <div>MUTHU KUMAR<br>32 year old<br>2 Unit (Blood)<br>government hospital<br>thoothukudi,TN<br>Tue, May 13 2025</div>
+    <div class="blood-type">A-</div>
+    <button class="donating-request-btn" onclick="window.location.href='file:///C:/Users/Chitra%20Venkat/Desktop/project/donate%20form.html'">Donate</button>
+  </div>
+
+  <div class="request-card">
+    <div>Ramakrishnan<br>22 year old<br>2 Unit (Blood)<br>Apolla hospital<br>chennai,TN<br>Tue, aug 05 2025</div>
+    <div class="blood-type">O-</div>
+    <button class="donating-request-btn" onclick="window.location.href='file:///C:/Users/Chitra%20Venkat/Desktop/project/donate%20form.html'">Donate</button>
+  </div>
+
+  <div class="section-title">People Who Donated Previously</div>
+
+  <div class="donor-card">
+    <div class="donor-info">
+      <span class="donor-name">Anjali Verma</span>
+      <span class="donor-meta">Date: July 20, 2025 • Blood Group: B+ • 1 Unit</span>
+    </div>
+    <button class="view-btn" onclick="showDetails('Anjali Verma','B+','1 Unit','July 20, 2025','Chennai, TN')">View</button>
+  </div>
+
+  <div class="donor-card">
+    <div class="donor-info">
+      <span class="donor-name">Ravi Kumar</span>
+      <span class="donor-meta">Date: July 18, 2025 • Blood Group: O- • 2 Units</span>
+    </div>
+    <button class="view-btn" onclick="showDetails('Ravi Kumar','O-','2 Units','July 18, 2025','Madurai, TN')">View</button>
+  </div>
+
+  <!-- Sneha Reddy card hidden initially -->
+  <div class="donor-card" id="snehaCard" style="display: none; margin-bottom: 100px;">
+    <div class="donor-info">
+      <span class="donor-name">Sneha Reddy</span>
+      <span class="donor-meta">Date: July 16, 2025 • Blood Group: AB+ • 1 Unit</span>
+    </div>
+    <button class="view-btn" onclick="showDetails('Sneha Reddy','AB+','1 Unit','July 16, 2025','Coimbatore, TN')">View</button>
+  </div>
+
+  <!-- Popup Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <h3 id="modalName"></h3>
+      <p><strong>Blood Group:</strong> <span id="modalBlood"></span></p>
+      <p><strong>Units Donated:</strong> <span id="modalUnits"></span></p>
+      <p><strong>Date:</strong> <span id="modalDate"></span></p>
+      <p><strong>Location:</strong> <span id="modalLocation"></span></p>
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="home.html" class="active">
+      <i>🏠</i>
+      HOME
+    </a>
+    <a href="file:///C:/Users/Chitra%20Venkat/Desktop/project/request.html">
+      <i>💧</i>
+      BLOOD REQUEST
+    </a>
+    <a href="file:///C:/Users/Chitra%20Venkat/Desktop/project/profile.html">
+      <i>👤</i>
+      PROFILE
+    </a>
+  </div>
+
+  <script>
+    function showDetails(name, blood, units, date, location) {
+      document.getElementById('modalName').innerText = name;
+      document.getElementById('modalBlood').innerText = blood;
+      document.getElementById('modalUnits').innerText = units;
+      document.getElementById('modalDate').innerText = date;
+      document.getElementById('modalLocation').innerText = location;
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside content
+    window.onclick = function(event) {
+      if (event.target == document.getElementById('modal')) {
+        closeModal();
+      }
+    }
+
+    // Show Sneha Reddy card when scrolled to bottom
+    window.addEventListener('scroll', function() {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+        document.getElementById('snehaCard').style.display = 'flex';
+      }
+    });
+
+    // ✅ Load blood requests from localStorage and show Donate button
+    const requests = JSON.parse(localStorage.getItem('bloodRequests')) || [];
+    const container = document.getElementById('emergency-requests');
+
+    if (requests.length > 0) {
+      requests.forEach(req => {
+        const card = document.createElement('div');
+        card.classList.add('request-card');
+        card.innerHTML = `
+          <div>
+            ${req.name}<br>
+            ${req.age} year old<br>
+            ${req.units} Unit (Blood)<br>
+            ${req.hospital}<br>
+            ${req.location}<br>
+            ${req.emergency ? "<span style='color:red;'>🚨 Emergency</span><br>" : ""}
+            Phone: ${req.phone}<br>
+            Notes: ${req.notes || 'N/A'}
+          </div>
+          <div class="blood-type">${req.bloodGroup}</div>
+          <button class="donating-request-btn" onclick="window.location.href='file:///C:/Users/Chitra%20Venkat/Desktop/project/donate%20form.html'">Donate</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>

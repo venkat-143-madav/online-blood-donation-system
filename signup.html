@@ -1,0 +1,143 @@
+<!-- Save this as signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blood Donation Sign Up</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background:url("change1.jpg")no-repeat center center fixed;;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .signup-box {
+      background: #fffffff1; /* Light clean color */
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #b31217;
+      margin-bottom: 30px;
+    }
+
+    .form-control, .form-select {
+      border-radius: 10px;
+    }
+
+    .btn-danger {
+      border-radius: 10px;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-box">
+    <h2>Create Your Donor Account</h2>
+    <form id="signupForm">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="firstName" class="form-label">First Name</label>
+          <input type="text" class="form-control" id="firstName" required />
+        </div>
+        <div class="col-md-6">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="lastName" required />
+        </div>
+
+        <div class="col-md-4">
+          <label for="age" class="form-label">Age</label>
+          <input type="number" class="form-control" id="age" required />
+        </div>
+
+        <div class="col-md-4">
+          <label for="city" class="form-label">City</label>
+          <input type="text" class="form-control" id="city" required />
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label d-block">Gender</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" id="male" value="Male" required />
+            <label class="form-check-label" for="male">Male</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" id="female" value="Female" />
+            <label class="form-check-label" for="female">Female</label>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" required />
+        </div>
+
+        <div class="col-md-6">
+          <label for="bloodGroup" class="form-label">Blood Group</label>
+          <select class="form-select" id="bloodGroup" required>
+            <option selected disabled value="">Select</option>
+            <option>A+</option>
+            <option>A-</option>
+            <option>B+</option>
+            <option>B-</option>
+            <option>AB+</option>
+            <option>AB-</option>
+            <option>O+</option>
+            <option>O-</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" required />
+        </div>
+
+        <div class="col-md-6">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="confirmPassword" required />
+          <div id="signupPasswordError" class="error-message"></div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-danger w-100 mt-4">Register</button>
+
+      <div class="text-center mt-3">
+        <a href="index.html">Already have an account? Login</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const signupForm = document.getElementById('signupForm');
+    const pass = document.getElementById('password');
+    const confirmPass = document.getElementById('confirmPassword');
+    const errorBox = document.getElementById('signupPasswordError');
+
+    signupForm.addEventListener('submit', function (e) {
+      if (pass.value !== confirmPass.value) {
+        e.preventDefault();
+        errorBox.textContent = "Passwords do not match!";
+      } else {
+        errorBox.textContent = "";
+      }
+    });
+  </script>
+
+</body>
+</html>

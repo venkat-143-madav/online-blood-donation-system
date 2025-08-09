@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Loading</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff4d4d, #ff9999);
+      font-family: Arial, sans-serif;
+      position: relative;
+    }
+
+    .heading {
+      position: absolute;
+      top: 30px;
+      font-size: 36px;
+      font-weight: bold;
+      color: white;
+      letter-spacing: 2px;
+    }
+
+    .profile-logo {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 150px;
+      border: 4px solid white;
+    }
+
+    .loader {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #ffffff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 0;
+    }
+
+    .loading-text {
+      margin-top: 0;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      letter-spacing: 2px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Heading -->
+  <div class="heading">Profile</div>
+
+  <!-- Rounded profile logo -->
+  <img src="logo 2.jpg" alt="Blood Donation Logo" class="profile-logo">
+  
+  <div class="loader"></div>
+  <div class="loading-text">Loading...</div>
+
+  <!-- JavaScript redirect -->
+  <script>
+    setTimeout(function() {
+      window.location.href = "file:///C:/Users/Chitra%20Venkat/Desktop/project/index.html";
+    }, 3000); // Redirects after 3 seconds
+  </script>
+
+</body>
+</html>

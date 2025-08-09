@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blood Request Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff4d4d, #ff9999);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      width: 420px;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #b30000;
+    }
+
+    .blood-group-box {
+      background: #ffe6e6;
+      border: 2px solid #b30000;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .blood-group-box span {
+      display: inline-block;
+      margin: 5px 8px;
+      padding: 6px 10px;
+      border: 1px solid #b30000;
+      border-radius: 6px;
+      background: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .blood-group-box span:hover {
+      background: #b30000;
+      color: #fff;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    .critical-notes-box {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      background: #f9f9f9;
+      margin-bottom: 15px;
+    }
+
+    .emergency-toggle {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 5px;
+      border-top: 1px dashed #ccc;
+    }
+
+    .emergency-toggle label {
+      margin: 0;
+      font-weight: bold;
+      color: #b30000;
+    }
+
+    .toggle {
+      appearance: none;
+      width: 60px;
+      height: 30px;
+      background: #ccc;
+      border-radius: 15px;
+      position: relative;
+      outline: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .toggle:checked {
+      background: #4CAF50;
+    }
+
+    .toggle:before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 22px;
+      height: 22px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+
+    .toggle:checked:before {
+      transform: translateX(30px);
+    }
+
+    .btn-submit {
+      display: block;
+      margin: 15px auto 0;
+      padding: 10px 20px;
+      background: #b30000;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-submit:hover {
+      background: #800000;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Blood Request Form</h2>
+
+    <div class="blood-group-box">
+      <strong>Available Blood Groups:</strong><br>
+      <span>A+</span> <span>A-</span>
+      <span>B+</span> <span>B-</span>
+      <span>O+</span> <span>O-</span>
+      <span>AB+</span> <span>AB-</span>
+    </div>
+
+    <form id="bloodRequestForm">
+      <label for="name">Patient Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter patient's name" required>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" placeholder="Enter age" required>
+
+      <label for="blood-group">Blood Group:</label>
+      <select id="blood-group" name="blood-group" required>
+        <option value="">Select blood group</option>
+        <option>A+</option>
+        <option>A-</option>
+        <option>B+</option>
+        <option>B-</option>
+        <option>O+</option>
+        <option>O-</option>
+        <option>AB+</option>
+        <option>AB-</option>
+      </select>
+
+      <label for="units">Units Required:</label>
+      <input type="number" id="units" name="units" placeholder="Enter units of blood" required>
+
+      <label for="location">Location (City):</label>
+      <select id="location" name="location" required>
+        <option value="">Select City</option>
+        <option>Chennai</option>
+        <option>Madurai</option>
+        <option>Coimbatore</option>
+        <option>Salem</option>
+        <option>Trichy</option>
+      </select>
+
+      <label for="hospital">Hospital Name:</label>
+      <input type="text" id="hospital" name="hospital" placeholder="Enter hospital name" required>
+
+      <div class="critical-notes-box">
+        <label for="notes">Critical Notes:</label>
+        <textarea id="notes" name="notes" rows="3" placeholder="Add any critical notes..."></textarea>
+
+        <div class="emergency-toggle">
+          <label for="emergency">Emergency Mode:</label>
+          <input type="checkbox" id="emergency" class="toggle">
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">Send Request</button>
+    </form>
+  </div>
+
+  <script>
+    const bloodGroupSpans = document.querySelectorAll('.blood-group-box span');
+    const bloodGroupSelect = document.getElementById('blood-group');
+
+    bloodGroupSpans.forEach(span => {
+      span.addEventListener('click', () => {
+        bloodGroupSelect.value = span.innerText;
+      });
+    });
+
+    // Handle form submission and store in localStorage
+    document.getElementById('bloodRequestForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const requestData = {
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        age: document.getElementById('age').value,
+        bloodGroup: document.getElementById('blood-group').value,
+        units: document.getElementById('units').value,
+        location: document.getElementById('location').value,
+        hospital: document.getElementById('hospital').value,
+        notes: document.getElementById('notes').value,
+        emergency: document.getElementById('emergency').checked
+      };
+
+      let requests = JSON.parse(localStorage.getItem('bloodRequests')) || [];
+      requests.push(requestData);
+      localStorage.setItem('bloodRequests', JSON.stringify(requests));
+
+      alert("✅ Details submitted successfully!");
+      window.location.href = "homepage.html"; // Redirect to homepage
+    });
+  </script>
+</body>
+</html>
